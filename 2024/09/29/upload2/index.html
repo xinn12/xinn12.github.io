@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>upload2 | Hexo</title><meta name="author" content="John Doe"><meta name="copyright" content="John Doe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="WEB学习日记4张新UPLOAD——labs12-21第12关 %00截断空字符 字符串读取的时候 有 0x00会被当做截断标志 你好0x00php 0x00后门的php不会被截取 显示出来的是：你好 %00和0x00一样 区别使用的地方不一样 %00在url中使用 0x00在编程语言中使用 原理：php的一些函数的底层是C语言，而move_uploaded_file就是其中之一，遇到0x00会截">
+<meta property="og:type" content="article">
+<meta property="og:title" content="upload2">
+<meta property="og:url" content="http://example.com/2024/09/29/upload2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="WEB学习日记4张新UPLOAD——labs12-21第12关 %00截断空字符 字符串读取的时候 有 0x00会被当做截断标志 你好0x00php 0x00后门的php不会被截取 显示出来的是：你好 %00和0x00一样 区别使用的地方不一样 %00在url中使用 0x00在编程语言中使用 原理：php的一些函数的底层是C语言，而move_uploaded_file就是其中之一，遇到0x00会截">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2024-09-29T10:56:14.000Z">
+<meta property="article:modified_time" content="2024-09-29T11:02:42.613Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2024/09/29/upload2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy Successful',
+    error: 'Copy Error',
+    noSupport: 'Browser Not Supported'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: 'Just now',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: 'Load More'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'upload2',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-09-29 19:02:42'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a href="/" title="Hexo"><span class="site-name">Hexo</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">upload2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2024-09-29T10:56:14.000Z" title="Created 2024-09-29 18:56:14">2024-09-29</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2024-09-29T11:02:42.613Z" title="Updated 2024-09-29 19:02:42">2024-09-29</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="upload2"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post Views:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="WEB学习日记4"><a href="#WEB学习日记4" class="headerlink" title="WEB学习日记4"></a><center><font face="仿宋" font color="orange" size="6">WEB学习日记4</font></center></h1><h2 id="张新"><a href="#张新" class="headerlink" title="张新"></a><center><font face="楷体" size=5>张新</font></center></h2><h3 id="UPLOAD——labs12-21"><a href="#UPLOAD——labs12-21" class="headerlink" title="UPLOAD——labs12-21"></a>UPLOAD——labs12-21</h3><h4 id="第12关-00截断"><a href="#第12关-00截断" class="headerlink" title="第12关 %00截断"></a>第12关 %00截断</h4><p>空字符</p>
+<p>字符串读取的时候 有 0x00会被当做截断标志</p>
+<p>你好0x00php</p>
+<p>0x00后门的php不会被截取 显示出来的是：你好</p>
+<p>%00和0x00一样</p>
+<p>区别使用的地方不一样 %00在url中使用 0x00在编程语言中使用</p>
+<p>原理：php的一些函数的底层是C语言，而move_uploaded_file就是其中之一，遇到0x00会截断，0x表示16进制，URL中%00解码成16进制就是0x00。</p>
+<p>使用的是白名单过滤 （主流网站基本都是白名单） 规定了可以上传文件的类型<br>代码审计：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$is_upload</span> = <span class="literal">false</span>;</span><br><span class="line"><span class="variable">$msg</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;submit&#x27;</span>]))&#123;</span><br><span class="line">    <span class="variable">$ext_arr</span> = <span class="keyword">array</span>(<span class="string">&#x27;jpg&#x27;</span>,<span class="string">&#x27;png&#x27;</span>,<span class="string">&#x27;gif&#x27;</span>);</span><br><span class="line">    <span class="variable">$file_ext</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;upload_file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>],<span class="title function_ invoke__">strrpos</span>(<span class="variable">$_FILES</span>[<span class="string">&#x27;upload_file&#x27;</span>][<span class="string">&#x27;name&#x27;</span>],<span class="string">&quot;.&quot;</span>)+<span class="number">1</span>);</span><br><span class="line">    <span class="comment">#获取.之后的内容 搜.最后一次出现的位置</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">in_array</span>(<span class="variable">$file_ext</span>,<span class="variable">$ext_arr</span>))&#123;</span><br><span class="line">        <span class="variable">$temp_file</span> = <span class="variable">$_FILES</span>[<span class="string">&#x27;upload_file&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>];</span><br><span class="line">        <span class="variable">$img_path</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;save_path&#x27;</span>].<span class="string">&quot;/&quot;</span>.<span class="title function_ invoke__">rand</span>(<span class="number">10</span>, <span class="number">99</span>).<span class="title function_ invoke__">date</span>(<span class="string">&quot;YmdHis&quot;</span>).<span class="string">&quot;.&quot;</span>.<span class="variable">$file_ext</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$temp_file</span>,<span class="variable">$img_path</span>))&#123;</span><br><span class="line">            <span class="variable">$is_upload</span> = <span class="literal">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="variable">$msg</span> = <span class="string">&#x27;上传出错！&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="variable">$msg</span> = <span class="string">&quot;只允许上传.jpg|.png|.gif类型文件！&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/66f7ee08f21886ccc070faea.png"><br>注意是在临时路径中修改<br><img src="https://pic.imgdb.cn/item/66f7ee39f21886ccc07120af.png"><br>jpg 上传文件类型</p>
+<p>C:… 临时路径</p>
+<p>&#x2F;upload 保存的位置 如果不加 %00 这个路径是错误的</p>
+<p>有php版本限制 5.3.24 之前的版本不支持且要修改php.ini文件里的msgcfg_magic_quotes_gpc参数为0<br>右击图片新建窗口查看得到php一句话木马文件内容</p>
+<h4 id="第13关-0X00截断"><a href="#第13关-0X00截断" class="headerlink" title="第13关 0X00截断"></a>第13关 0X00截断</h4><p>同第12关做法相同 只不过上传路径在$_POST数据中 不需要url编码</p>
+<p>这里说一个小技巧 不需要修改hex值那么麻烦 只要在burp里面输入%00 然后进行url解码即可 得到就是0x0000截断<br>同第12关做法相同 只不过上传路径在$_POST数据中 不需要url编码</p>
+<p>这里说一个小技巧 不需要修改hex值那么麻烦 只要在burp里面输入%00 然后进行url解码即可 得到就是0x00<br><img src="https://pic.imgdb.cn/item/66f7efc1f21886ccc07263f6.png"><br><img src="https://pic.imgdb.cn/item/66f7efe8f21886ccc072e753.png"></p>
+<h4 id="第14关-（文件包含-图片马）"><a href="#第14关-（文件包含-图片马）" class="headerlink" title="第14关 （文件包含+图片马）"></a>第14关 （文件包含+图片马）</h4><p>代码审计：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getReailFileType</span>(<span class="params"><span class="variable">$filename</span></span>)</span>&#123;</span><br><span class="line">    <span class="variable">$file</span> = <span class="title function_ invoke__">fopen</span>(<span class="variable">$filename</span>, <span class="string">&quot;rb&quot;</span>);</span><br><span class="line">    <span class="variable">$bin</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$file</span>, <span class="number">2</span>); <span class="comment">//只读2字节</span></span><br><span class="line">    <span class="title function_ invoke__">fclose</span>(<span class="variable">$file</span>);</span><br><span class="line">    <span class="variable">$strInfo</span> = @<span class="title function_ invoke__">unpack</span>(<span class="string">&quot;C2chars&quot;</span>, <span class="variable">$bin</span>);    </span><br><span class="line">    <span class="variable">$typeCode</span> = <span class="title function_ invoke__">intval</span>(<span class="variable">$strInfo</span>[<span class="string">&#x27;chars1&#x27;</span>].<span class="variable">$strInfo</span>[<span class="string">&#x27;chars2&#x27;</span>]);    </span><br><span class="line">    <span class="variable">$fileType</span> = <span class="string">&#x27;&#x27;</span>;    </span><br><span class="line">    <span class="keyword">switch</span>(<span class="variable">$typeCode</span>)&#123;      </span><br><span class="line">        <span class="keyword">case</span> <span class="number">255216</span>:            </span><br><span class="line">            <span class="variable">$fileType</span> = <span class="string">&#x27;jpg&#x27;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">13780</span>:            </span><br><span class="line">            <span class="variable">$fileType</span> = <span class="string">&#x27;png&#x27;</span>;</span><br><span class="line">            <span class="keyword">break</span>;        </span><br><span class="line">        <span class="keyword">case</span> <span class="number">7173</span>:            </span><br><span class="line">            <span class="variable">$fileType</span> = <span class="string">&#x27;gif&#x27;</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">default</span>:            </span><br><span class="line">            <span class="variable">$fileType</span> = <span class="string">&#x27;unknown&#x27;</span>;</span><br><span class="line">        &#125;    </span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$fileType</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>大致意思就是读取文件头的两字节 将二进制数据转换为ASCII值 进行switch比较 也就是说只验证文件头信息</p>
+<blockquote>
+<p>图⽚⽂件头以及解码(16进制)</p>
+</blockquote>
+<p>1.JPEG</p>
+<ul>
+<li><p>⽂件头标识 (2 bytes): 0xff, 0xd8 (SOI) (JPEG ⽂件标识)</p>
+</li>
+<li><p>⽂件结束标识 (2 bytes): 0xff, 0xd9 (EOI)</p>
+</li>
+</ul>
+<p>2.PNG</p>
+<ul>
+<li>⽂件头标识 (8 bytes)   89 50 4E 47 0D 0A 1A 0A</li>
+</ul>
+<p>3.GIF</p>
+<ul>
+<li>⽂件头标识 (6 bytes)   47 49 46 38 39(37) 61<br>那么直接上传图片马就完了</li>
+</ul>
+<p>图片马可以用Notepad++打开图片 在图片末尾添加<br><img src="https://pic.imgdb.cn/item/66f7f06cf21886ccc0735b31.png"><br>或者cmd中 copy [图片文件名] &#x2F;b + [shell文件名] &#x2F;a [合成后的文件名]<br>列如<br><img src="https://pic.imgdb.cn/item/66f7f11bf21886ccc0740109.png"><br>利用文件包含漏洞  将含有php代码的图片马当做php文件解析</p>
+<p>文件包含就相当于将其他目录的php文件复制粘贴到所在的php文件 减少代码的重复书写</p>
+<p>这里利用get传参 将图片木马里面的代码复制过来并执行<br><img src="https://pic.imgdb.cn/item/66f7f18ef21886ccc0746a34.png"><br>include.php?file&#x3D;upload&#x2F;7920221011132540.png<br>或者include.php?file&#x3D;.&#x2F;upload&#x2F;7920221011132540.png</p>
+<h4 id="第15关-（文件包含-图片马）"><a href="#第15关-（文件包含-图片马）" class="headerlink" title="第15关 （文件包含+图片马）"></a>第15关 （文件包含+图片马）</h4><p>同第14关<br>阅读代码 这里只讲解主要函数 其余代码都差不多</p>
+<blockquote>
+<p>getimagesize()函数：<br>返回一个具有四个单元的数组。<br>索引 0 包含图像宽度的像素值，<br>索引 1 包含图像高度的像素值。<br>&#x3D;&#x3D;索引 2&#x3D;&#x3D; 是图像类型的标记：1 &#x3D; GIF，2 &#x3D; JPG，3 &#x3D; PNG，4 &#x3D; SWF，5 &#x3D; PSD，6 &#x3D; BMP，7 &#x3D; TIFF(intel byte order)，8 &#x3D; TIFF(motorola byte order)，9 &#x3D; JPC，10 &#x3D; JP2，11 &#x3D; JPX，12 &#x3D; JB2，13 &#x3D; SWC，14 &#x3D; IFF，15 &#x3D; WBMP，16 &#x3D; XBM。这些标记与 PHP 4.3.0 新加的 IMAGETYPE 常量对应。<br>索引 3 是文本字符串，内容为”height&#x3D;”yyy” width&#x3D;”xxx””，可直接用于 IMG 标记。</p>
+</blockquote>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$temp_file</span> = <span class="variable">$_FILES</span>[<span class="string">&#x27;upload_file&#x27;</span>][<span class="string">&#x27;tmp_name&#x27;</span>];</span><br><span class="line"><span class="variable">$res</span> = <span class="title function_ invoke__">isImage</span>(<span class="variable">$temp_file</span>);</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isImage</span>(<span class="params"><span class="variable">$filename</span></span>)</span>&#123;</span><br><span class="line">    <span class="comment"># 定义含有三种图片格式的字符串</span></span><br><span class="line">    <span class="variable">$types</span> = <span class="string">&#x27;.jpeg|.png|.gif&#x27;</span>;</span><br><span class="line">    <span class="comment"># 判断是否存在临时文件</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="title function_ invoke__">file_exists</span>(<span class="variable">$filename</span>))&#123;</span><br><span class="line">        <span class="variable">$info</span> = <span class="title function_ invoke__">getimagesize</span>(<span class="variable">$filename</span>);</span><br><span class="line">       <span class="comment">//getimagesize — 取得图像大小 返回一个数组 </span></span><br><span class="line">      <span class="comment">//例如array(7) &#123; </span></span><br><span class="line">        [<span class="number">0</span>]=&gt; <span class="keyword">int</span>(<span class="number">500</span>) </span><br><span class="line">        [<span class="number">1</span>]=&gt; <span class="keyword">int</span>(<span class="number">500</span>) </span><br><span class="line">        [<span class="number">2</span>]=&gt; <span class="keyword">int</span>(<span class="number">1</span>) </span><br><span class="line">        [<span class="number">3</span>]=&gt; <span class="keyword">string</span>(<span class="number">24</span>) <span class="string">&quot;width=&quot;</span><span class="number">500</span><span class="string">&quot; height=&quot;</span><span class="number">500</span><span class="string">&quot;&quot;</span> </span><br><span class="line">        [<span class="string">&quot;bits&quot;</span>]=&gt; <span class="keyword">int</span>(<span class="number">8</span>) </span><br><span class="line">        [<span class="string">&quot;channels&quot;</span>]=&gt; <span class="keyword">int</span>(<span class="number">3</span>) </span><br><span class="line">        [<span class="string">&quot;mime&quot;</span>]=&gt; <span class="keyword">string</span>(<span class="number">9</span>) <span class="string">&quot;image/gif&quot;</span> &#125; </span><br><span class="line">        <span class="variable">$ext</span> = <span class="title function_ invoke__">image_type_to_extension</span>(<span class="variable">$info</span>[<span class="number">2</span>]);  <span class="comment">//根据指定的图像类型返回对应的后缀名。</span></span><br><span class="line">        <span class="comment"># 判断后缀名是否在字符串中 是返回对应数字 否则返回false</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="title function_ invoke__">stripos</span>(<span class="variable">$types</span>,<span class="variable">$ext</span>)&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable">$ext</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>做法和第14关相同</p>
+<h4 id="第16关-（文件包含-图片马）"><a href="#第16关-（文件包含-图片马）" class="headerlink" title="第16关 （文件包含+图片马）"></a>第16关 （文件包含+图片马）</h4><p><img src="https://pic.imgdb.cn/item/66f7f242f21886ccc0752639.png"><br>没啥区别 只是换了函数  需要开启&#x3D;&#x3D;php_exif模块&#x3D;&#x3D;。 </p>
+<p>做法和第14关相同</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>Author: </span><span class="post-copyright-info"><a href="http://example.com">John Doe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>Link: </span><span class="post-copyright-info"><a href="http://example.com/2024/09/29/upload2/">http://example.com/2024/09/29/upload2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2024/09/29/hello-world/" title="Hello World"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">Next</div><div class="next_info">Hello World</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">John Doe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">Tags</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">Categories</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Contents</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#WEB%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B04"><span class="toc-number">1.</span> <span class="toc-text">WEB学习日记4</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%A0%E6%96%B0"><span class="toc-number">1.1.</span> <span class="toc-text">张新</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UPLOAD%E2%80%94%E2%80%94labs12-21"><span class="toc-number">1.1.1.</span> <span class="toc-text">UPLOAD——labs12-21</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC12%E5%85%B3-00%E6%88%AA%E6%96%AD"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">第12关 %00截断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC13%E5%85%B3-0X00%E6%88%AA%E6%96%AD"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">第13关 0X00截断</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC14%E5%85%B3-%EF%BC%88%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E5%9B%BE%E7%89%87%E9%A9%AC%EF%BC%89"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">第14关 （文件包含+图片马）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC15%E5%85%B3-%EF%BC%88%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E5%9B%BE%E7%89%87%E9%A9%AC%EF%BC%89"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">第15关 （文件包含+图片马）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AC%AC16%E5%85%B3-%EF%BC%88%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB-%E5%9B%BE%E7%89%87%E9%A9%AC%EF%BC%89"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">第16关 （文件包含+图片马）</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/29/upload2/" title="upload2">upload2</a><time datetime="2024-09-29T10:56:14.000Z" title="Created 2024-09-29 18:56:14">2024-09-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/09/29/hello-world/" title="Hello World">Hello World</a><time datetime="2024-09-29T06:44:19.561Z" title="Created 2024-09-29 14:44:19">2024-09-29</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By John Doe</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between Single-column and Double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
